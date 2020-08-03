@@ -1,6 +1,10 @@
 import {createLogger, format, transports} from 'winston'
+import { LogginWinston } from' @google-cloud/logging-winston'
 
 const dateFormat = () => new Date(Date.now()).toUTCString()
+const loggingWinston = new LoggingWinston({
+    prefix: 'myModule'
+});
 
 export default _route_ =>{ 
     const file = _route_ ? `${_route_}.log` : 'app.log'
@@ -19,7 +23,8 @@ export default _route_ =>{
             }),
             new transports.Console({
                 level: 'debug'
-            })
+            }),
+            loggingWinston
         ]
     })
 }
